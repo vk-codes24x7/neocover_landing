@@ -6,7 +6,7 @@ import { emailCheckLimiter } from '@/lib/rate-limit'
 export async function POST(request: NextRequest) {
   try {
     // Rate limiting
-    const clientIP = request.ip || request.headers.get('x-forwarded-for') || 'unknown'
+    const clientIP = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown'
     if (!emailCheckLimiter.isAllowed(clientIP)) {
       return NextResponse.json(
         { error: 'Too many requests. Please try again later.' },

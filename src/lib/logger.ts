@@ -8,13 +8,13 @@ interface LogEntry {
   level: LogLevel
   message: string
   timestamp: string
-  context?: Record<string, any>
+  context?: Record<string, unknown>
 }
 
 class Logger {
   private isDevelopment = process.env.NODE_ENV === 'development'
 
-  private formatLog(level: LogLevel, message: string, context?: Record<string, any>): LogEntry {
+  private formatLog(level: LogLevel, message: string, context?: Record<string, unknown>): LogEntry {
     return {
       level,
       message,
@@ -30,28 +30,28 @@ class Logger {
     return level === 'warn' || level === 'error'
   }
 
-  info(message: string, context?: Record<string, any>) {
+  info(message: string, context?: Record<string, unknown>) {
     if (this.shouldLog('info')) {
       const logEntry = this.formatLog('info', message, context)
       console.log(`[INFO] ${logEntry.timestamp}: ${message}`, context || '')
     }
   }
 
-  warn(message: string, context?: Record<string, any>) {
+  warn(message: string, context?: Record<string, unknown>) {
     if (this.shouldLog('warn')) {
       const logEntry = this.formatLog('warn', message, context)
       console.warn(`[WARN] ${logEntry.timestamp}: ${message}`, context || '')
     }
   }
 
-  error(message: string, context?: Record<string, any>) {
+  error(message: string, context?: Record<string, unknown>) {
     if (this.shouldLog('error')) {
       const logEntry = this.formatLog('error', message, context)
       console.error(`[ERROR] ${logEntry.timestamp}: ${message}`, context || '')
     }
   }
 
-  debug(message: string, context?: Record<string, any>) {
+  debug(message: string, context?: Record<string, unknown>) {
     if (this.isDevelopment) {
       const logEntry = this.formatLog('debug', message, context)
       console.debug(`[DEBUG] ${logEntry.timestamp}: ${message}`, context || '')

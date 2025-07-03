@@ -28,10 +28,8 @@ import { WaitlistForm } from "@/components/waitlist-form"
 import { 
   APP_CONFIG, 
   FEATURES, 
-  HOW_IT_WORKS_STEPS, 
   COMPANY_LOGOS, 
-  STATS,
-  SCROLL_CONFIG 
+  STATS
 } from "@/lib/constants"
 
 export default function Home() {
@@ -63,7 +61,7 @@ export default function Home() {
 
   // Icon helper function
   const getIconComponent = (iconName: string) => {
-    const iconMap: Record<string, any> = {
+    const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
       FileText,
       MessageSquare,
       Target,
@@ -124,7 +122,7 @@ export default function Home() {
                   <Quote className="w-8 h-8 text-accent flex-shrink-0 mt-1" aria-hidden="true" />
                   <div>
                     <blockquote className="text-lg text-foreground mb-4 italic">
-                      "NeoCover helped me land 3 interviews in just one week. The AI-tailored resume was spot-on for each role!"
+                      &ldquo;NeoCover helped me land 3 interviews in just one week. The AI-tailored resume was spot-on for each role!&rdquo;
                     </blockquote>
                     <div className="flex items-center space-x-3">
                       <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
@@ -179,7 +177,7 @@ export default function Home() {
                       Interactive Demo Coming Soon
                     </p>
                     <p className="text-muted-foreground text-sm">
-                      Experience NeoCover's AI in action
+                      Experience NeoCover&apos;s AI in action
                     </p>
                   </div>
                 </div>
@@ -197,7 +195,7 @@ export default function Home() {
               Everything You Need to Land Your Dream Job
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Powered by advanced AI to give you the competitive edge in today's job market.
+              Powered by advanced AI to give you the competitive edge in today&apos;s job market.
             </p>
           </div>
 
@@ -258,7 +256,7 @@ export default function Home() {
                   2. Paste Job Description
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Copy and paste the job description from any job posting. We'll identify key requirements and keywords.
+                  Copy and paste the job description from any job posting. We&apos;ll identify key requirements and keywords.
                 </p>
               </div>
             </div>

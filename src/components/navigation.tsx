@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Menu, X } from 'lucide-react'
-import { NAVIGATION_ITEMS, APP_CONFIG, SCROLL_CONFIG } from '@/lib/constants'
+import { NAVIGATION_ITEMS, APP_CONFIG } from '@/lib/constants'
 
 interface NavigationProps {
   scrollToSection: (sectionId: string) => void

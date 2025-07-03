@@ -113,10 +113,10 @@ export function WaitlistForm({ onSuccess, onError }: WaitlistFormProps) {
         <div className="text-center py-4">
           <CheckCircle className="w-12 h-12 text-accent mx-auto mb-4" />
           <h3 className="text-lg font-semibold text-foreground mb-2">
-            You're on the list!
+            You&apos;re on the list!
           </h3>
           <p className="text-muted-foreground">
-            We'll notify you when NeoCover is ready.
+            We&apos;ll notify you when NeoCover is ready.
           </p>
         </div>
       </Card>

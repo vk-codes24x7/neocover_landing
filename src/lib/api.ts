@@ -11,7 +11,7 @@ export interface CheckEmailResponse {
 
 export interface AddToWaitlistResponse {
   success: boolean
-  data?: any
+  data?: Record<string, unknown>
   message: string
 }
 
