@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { ThemeToggle } from '@/components/theme-toggle'
@@ -15,9 +15,25 @@ interface NavigationProps {
 export function Navigation({ scrollToSection, scrollProgress }: NavigationProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isMobileMenuOpen])
+
   const handleNavClick = (sectionId: string) => {
     scrollToSection(sectionId)
     setIsMobileMenuOpen(false)
+  }
+
+  const handleMobileMenuToggle = () => {
+    setIsMobileMenuOpen((open) => !open)
   }
 
   return (
@@ -62,9 +78,10 @@ export function Navigation({ scrollToSection, scrollProgress }: NavigationProps)
           <div className="flex items-center space-x-4">
             <ThemeToggle />
             <button 
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden text-white/80 hover:text-white transition-colors duration-200 p-2"
+              onClick={handleMobileMenuToggle}
+              className="md:hidden text-white/80 hover:text-white transition-colors duration-200 p-2 hover:scale-105"
               aria-label="Toggle mobile menu"
+              title={isMobileMenuOpen ? "Close menu" : "Open menu"}
             >
               {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -80,22 +97,31 @@ export function Navigation({ scrollToSection, scrollProgress }: NavigationProps)
         </div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-[#1F2937] border-b border-border/50 shadow-lg">
-          <div className="container mx-auto px-4 py-4 space-y-4">
+        <div className="fixed inset-0 z-[100] bg-black/70 flex flex-col">
+          <div className="flex justify-end p-4">
+            <button
+              onClick={handleMobileMenuToggle}
+              className="text-white text-3xl p-2 focus:outline-none"
+              aria-label="Close mobile menu"
+            >
+              <X className="w-8 h-8" />
+            </button>
+          </div>
+          <div className="flex-1 flex flex-col items-center justify-center space-y-6">
             {NAVIGATION_ITEMS.map((item) => (
               <button 
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className="block w-full text-left text-white/80 hover:text-white transition-colors duration-200 text-sm font-medium py-2"
+                className="text-white text-2xl font-semibold py-2 hover:text-accent transition-colors"
               >
                 {item.label}
               </button>
             ))}
             <Button 
               onClick={() => handleNavClick('join')}
-              className="w-full bg-accent hover:bg-accent/90 text-white font-medium px-4 py-2 text-sm"
+              className="w-40 h-12 bg-accent hover:bg-accent/90 text-white font-bold text-lg mt-4"
             >
               Join
             </Button>
